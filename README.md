@@ -1,4 +1,4 @@
-# Slate
+# _slate
 
 A starter theme.
 
