@@ -5,13 +5,25 @@
   "author": "Nate Weller <hello@nateweller.com>",
   "license": "MIT",
   "devDependencies": {
+    "@babel/core": "^7.0.0-0",
     "@wordpress/scripts": "^12.3.0",
     "dir-archiver": "^1.1.2",
-    "node-sass": "^4.14.1"
+    "imageoptim-cli": "^3.0.2",
+    "node-sass": "^4.14.1",
+    "nodemon": "^2.0.5",
+    "postcss": "^8.1.1",
+    "postcss-cli": "^8.1.0",
+    "reload": "^3.1.1"
   },
   "scripts": {
-    "watch": "node-sass sass/ -o ./ --source-map true --output-style expanded --indent-type tab --indent-width 1 -w",
-    "compile:css": "node-sass sass/ -o ./ && stylelint '*.css' --fix || true && stylelint '*.css' --fix",
+    "watch": "nodemon -e scss --exec \"yarn compile:css\"",
+    "dev": "nodemon -e scss --exec \"yarn dev:compile:css\"",
+    "dev:compile:css": "yarn compile:css:convert && yarn compile:css:prefix",
+    "compile:css": "yarn compile:css:convert && yarn compile:css:prefix && yarn compile:css:compress",
+    "compile:css:convert": "node-sass sass/ -o ./",
+    "compile:css:prefix": "postcss --use autoprefixer -b 'last 5 versions' ./style.css -o ./style.css",
+    "compile:css:compress": "node-sass ./style.css ./style.css --output-style compressed",
+    "compile:images": "imageoptim '/images'",
     "lint:scss": "wp-scripts lint-style 'sass/**/*.scss'",
     "lint:js": "wp-scripts lint-js 'js/*.js'",
     "bundle": "dir-archiver --src . --dest ../_slate.zip --exclude .DS_Store .stylelintrc.json .eslintrc .git .gitattributes .github .gitignore README.md composer.json composer.lock node_modules vendor package-lock.json package.json .travis.yml phpcs.xml.dist sass style.css.map"

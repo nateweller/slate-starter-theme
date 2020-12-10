@@ -1,0 +1,108 @@
+$font-size-2xs:     0.75rem;    // 12px
+$font-size-xs:      0.875rem;   // 14px
+$font-size-sm:      1rem;       // 16px
+$font-size-md:      1.0625rem;  // 17px
+$font-size-lg:      1.125rem;   // 18px
+$font-size-xl:      1.25rem;    // 20px
+$font-size-2xl:     1.5rem;     // 24px
+$font-size-3xl:     1.875rem;   // 30px
+$font-size-4xl:     2.25rem;    // 36px
+$font-size-5xl:     3rem;       // 48px
+
+$font-weight-normal:    400;
+$font-weight-semibold:  600;
+$font-weight-bold:      700;
+
+$spacer-0:   0.00rem;
+$spacer-1:   0.25rem;
+$spacer-2:   0.50rem;
+$spacer-3:   0.75rem;
+$spacer-4:   1.00rem;
+$spacer-5:   1.25rem;
+$spacer-6:   1.50rem;
+$spacer-7:   1.75rem;
+$spacer-8:   2.00rem;
+$spacer-9:   2.25rem;
+$spacer-10:  2.50rem;
+$spacer-11:  2.75rem;
+$spacer-12:  3.00rem;
+$spacer-14:  3.50rem;
+$spacer-16:  4.00rem;
+$spacer-20:  5.00rem;
+$spacer-24:  6.00rem;
+$spacer-28:  7.00rem;
+$spacer-32:  8.00rem;
+$spacer-36:  9.00rem;
+$spacer-40: 10.00rem;
+$spacer-44: 11.00rem;
+$spacer-48: 12.00rem;
+$spacer-52: 13.00rem;
+$spacer-56: 14.00rem;
+$spacer-60: 15.00rem;
+$spacer-64: 16.00rem;
+$spacer-72: 18.00rem;
+$spacer-80: 20.00rem;
+$spacer-96: 24.00rem;
+
+$spacers: (
+    0: $spacer-0,
+    1: $spacer-1,
+    2: $spacer-2,
+    3: $spacer-3,
+    4: $spacer-4,
+    5: $spacer-5,
+    6: $spacer-6,
+    7: $spacer-7,
+    8: $spacer-8,
+    9: $spacer-9,
+    10: $spacer-10,
+    11: $spacer-11,
+    12: $spacer-12,
+    14: $spacer-14,
+    16: $spacer-16,
+    20: $spacer-20,
+    24: $spacer-24,
+    28: $spacer-28,
+    32: $spacer-32,
+    36: $spacer-36,
+    40: $spacer-40,
+    44: $spacer-44,
+    48: $spacer-48,
+    52: $spacer-52,
+    56: $spacer-56,
+    60: $spacer-60,
+    64: $spacer-64,
+    72: $spacer-72,
+    80: $spacer-80,
+    96: $spacer-96
+);
+
+
+$white: #fff;
+$black: #000;
+
+$gray-50:  rgb(249, 250, 251);
+$gray-100: rgb(243, 244, 246);
+$gray-200: rgb(229, 231, 235);
+$gray-300: rgb(209, 213, 219);
+$gray-400: rgb(156, 163, 175);
+$gray-500: rgb(107, 114, 128);
+$gray-600: rgb(75, 85, 99);
+$gray-700: rgb(55, 65, 81);
+$gray-800: rgb(31, 41, 55);
+$gray-900: rgb(17, 24, 39);
+
+$blue-500: rgb(59, 130, 246);
+
+$breakpoint-sm: 640px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;
+$breakpoint-2xl: 1536px;
+$breakpoints: (
+    'sm': $breakpoint-sm,
+    'md': $breakpoint-md,
+    'lg': $breakpoint-lg,
+    'xl': $breakpoint-xl,
+    '2xl': $breakpoint-2xl
+);

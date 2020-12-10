@@ -1,0 +1,85 @@
+//**
+// Spacing utilities
+//**
+
+.--margin-auto {
+    margin: auto !important;
+}
+.--margin-top-auto {
+    margin-top: auto !important;
+}
+.--margin-right-auto {
+    margin-right: auto !important;
+}
+.--margin-bottom-auto {
+    margin-bottom: auto !important;
+}
+.--margin-left-auto {
+    margin-left: auto !important;
+}
+.--margin-x-auto {
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+.--margin-y-auto {
+    margin-top: auto !important;
+    margin-bottom: auto !important;
+}
+
+@each $name, $size in $spacers {
+
+    .--margin-#{$name} {
+        margin-top: $size !important;
+        margin-right: $size !important;
+        margin-bottom: $size !important;
+        margin-left: $size !important;
+    }
+    .--margin-top-#{$name} {
+        margin-top: $size !important;
+    };
+    .--margin-right-#{$name} {
+        margin-right: $size !important;
+    };
+    .--margin-bottom-#{$name} {
+        margin-bottom: $size !important;
+    };
+    .--margin-left-#{$name} {
+        margin-left: $size !important;
+    };
+    .--margin-x-#{$name} {
+        margin-right: $size !important;
+        margin-left: $size !important;
+    };
+    .--margin-y-#{$name} {
+        margin-top: $size !important;
+        margin-bottom: $size !important;
+    };
+
+    .--padding-#{$name} {
+        padding-top: $size !important;
+        padding-right: $size !important;
+        padding-bottom: $size !important;
+        padding-left: $size !important;
+    }
+    .--padding-top-#{$name} {
+        padding-top: $size !important;
+    };
+    .--padding-right-#{$name} {
+        padding-right: $size !important;
+    };
+    .--padding-bottom-#{$name} {
+        padding-bottom: $size !important;
+    };
+    .--padding-left-#{$name} {
+        padding-left: $size !important;
+    };
+    .--padding-x-#{$name} {
+        padding-right: $size !important;
+        padding-left: $size !important;
+    };
+    .--padding-y-#{$name} {
+        padding-top: $size !important;
+        padding-bottom: $size !important;
+    };
+
+}

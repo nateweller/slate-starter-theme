@@ -1,0 +1,21 @@
+.container {
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: $spacer-4;
+    padding-left: $spacer-4;
+}
+
+@each $breakpoint, $size in $breakpoints {
+    @media (min-width: $size) {
+        .container {
+            max-width: $size;
+        }
+    }
+}
+
+@media (min-width: map-get($breakpoints, 'md')) {
+    .container--narrow {
+        max-width: map-get($breakpoints, 'md');
+    }
+}

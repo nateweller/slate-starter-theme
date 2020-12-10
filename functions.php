@@ -7,6 +7,8 @@
  * @package _slate
  */
 
+require_once(__DIR__ . '/vendor/autoload.php');
+
 if ( ! defined( '_slate_VERSION' ) ) {
 	// Replace the version number of the theme on each release.
 	define( '_slate_VERSION', '0.0.0' );
@@ -78,6 +80,13 @@ if ( ! function_exists( '_slate_setup' ) ) :
 				'flex-height' => true,
 			)
 		);
+
+		/**
+		 * Add default menu locations.
+		 */
+		register_nav_menus( array(
+			'primary_menu' => __( 'Primary Menu', '_slate' )
+		) );
 	}
 endif;
 add_action( 'after_setup_theme', '_slate_setup' );
@@ -98,10 +107,19 @@ add_action( 'after_setup_theme', '_slate_content_width', 0 );
  * Enqueue scripts and styles.
  */
 function _slate_scripts() {
+	// disable core block styles on the front end
+	wp_dequeue_style( 'wp-block-library' );
+	wp_dequeue_style( 'wp-block-library-theme' );
+	// load the theme stylesheet
 	wp_enqueue_style( '_slate-style', get_stylesheet_uri(), array(), _slate_VERSION );
-
+	
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
 }
 add_action( 'wp_enqueue_scripts', '_slate_scripts' );
+
+function mytheme_excerpt_more( $more ) {
+    return '';
+}
+add_filter('excerpt_more', 'mytheme_excerpt_more');

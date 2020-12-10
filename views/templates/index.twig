@@ -1,0 +1,17 @@
+{% extends 'layouts/container.twig' %}
+
+{% block content %}
+    {% for post in posts %}
+        <article class="content-area {{ not loop.last ? '--margin-bottom-24' }}">
+            <h2>
+                {{ post.title }}
+            </h2>
+            <p>
+                {{ post.preview.read_more(false) }}
+            </p>
+            <a href="{{ post.link }}" class="button">
+                {{ __('Learn More', '_slate') }}
+            </a>
+        </article>
+    {% endfor %}
+{% endblock %}

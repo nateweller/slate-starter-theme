@@ -1,0 +1,1 @@
+<?php \Timber\Timber::render( 'views/templates/404.twig' );

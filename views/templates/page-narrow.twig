@@ -1,0 +1,12 @@
+{% extends 'layouts/container-narrow.twig' %}
+
+{% block content %}
+    <article class="content-area">
+        <header class="--padding-bottom-4">
+            <h2>
+                {{ post.title }}
+            </h2>
+        </header>
+        {{ post.content }}
+    </article>
+{% endblock %}

@@ -5,3 +5,27 @@
  * Version: 0.0.0 
  * Text Domain: _slate 
  */
+@import '_normalize';
+@import '_variables';
+@import 'buttons';
+@import 'containers';
+@import 'forms';
+@import 'spacers';
+@import 'typography';
+
+@import 'site-header';
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+body > main {
+    flex: 1;
+}

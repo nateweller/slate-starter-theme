@@ -1,0 +1,15 @@
+{{ fn('get_header') }}
+
+<main>
+    <div class="container --padding-y-24">
+        {% block content %}
+            {% for post in posts %}
+                <article>
+                    {{ post.content }}
+                </article>
+            {% endfor %}
+        {% endblock %}
+    </div>
+</main>
+
+{{ fn('get_footer') }}

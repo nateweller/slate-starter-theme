@@ -1,0 +1,13 @@
+{{ fn('get_header') }}
+
+<main>
+    {% block content %}
+        {% for post in posts %}
+            <article>
+                {{ post.content }}
+            </article>
+        {% endfor %}
+    {% endblock %}
+</main>
+
+{{ fn('get_footer') }}
