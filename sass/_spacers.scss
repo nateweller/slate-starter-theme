@@ -1,85 +1,92 @@
 //**
 // Spacing utilities
+//==
+// - Generates utility classes for margins and padding
+// - Naming conventions for utility classes are controlled in _variables.scss
 //**
 
-.--margin-auto {
-    margin: auto !important;
+@mixin generate-utility-classes($abbreviation, $property, $value, $name) {
+    .--#{$abbreviation}-#{$name} {
+        #{$property}: $value !important;
+    }
+    .--#{$abbreviation}-x-#{$name} {
+        #{$property}-left: $value !important;
+        #{$property}-right: $value !important;
+    }
+    .--#{$abbreviation}-y-#{$name} {
+        #{$property}-top: $value !important;
+        #{$property}-bottom: $value !important;
+    }
+    @each $side-abbreviation, $side in $sides {
+        .--#{$abbreviation}-#{$side-abbreviation}-#{$name} {
+            #{$property}-#{$side}: $value !important;
+        }
+    }
 }
-.--margin-top-auto {
-    margin-top: auto !important;
-}
-.--margin-right-auto {
-    margin-right: auto !important;
-}
-.--margin-bottom-auto {
-    margin-bottom: auto !important;
-}
-.--margin-left-auto {
-    margin-left: auto !important;
-}
-.--margin-x-auto {
-    margin-left: auto !important;
-    margin-right: auto !important;
-}
-.--margin-y-auto {
-    margin-top: auto !important;
-    margin-bottom: auto !important;
-}
+
+// auto margins
+@include generate-utility-classes(
+    $margin-abbreviation, 
+    'margin', 
+    'auto', 
+    'auto'
+);
 
 @each $name, $size in $spacers {
 
-    .--margin-#{$name} {
-        margin-top: $size !important;
-        margin-right: $size !important;
-        margin-bottom: $size !important;
-        margin-left: $size !important;
+    // margins
+    @include generate-utility-classes(
+        $margin-abbreviation, 
+        'margin', 
+        $size, 
+        $name
+    );
+    @each $breakpoint-name, $breakpoint-value in $breakpoints {
+        @media (min-width: $breakpoint-value) {
+            @include generate-utility-classes(
+                '#{$margin-abbreviation}-#{breakpoint-name}', 
+                'margin', 
+                $size, 
+                $name
+            );
+        }
     }
-    .--margin-top-#{$name} {
-        margin-top: $size !important;
-    };
-    .--margin-right-#{$name} {
-        margin-right: $size !important;
-    };
-    .--margin-bottom-#{$name} {
-        margin-bottom: $size !important;
-    };
-    .--margin-left-#{$name} {
-        margin-left: $size !important;
-    };
-    .--margin-x-#{$name} {
-        margin-right: $size !important;
-        margin-left: $size !important;
-    };
-    .--margin-y-#{$name} {
-        margin-top: $size !important;
-        margin-bottom: $size !important;
-    };
 
-    .--padding-#{$name} {
-        padding-top: $size !important;
-        padding-right: $size !important;
-        padding-bottom: $size !important;
-        padding-left: $size !important;
+    // negative margins
+    // negative margins are denoted with an 'n' prefixed to the size name i.e. --margin-top-n10
+    @include generate-utility-classes(
+        $margin-abbreviation,
+        'margin', 
+        $size, 
+        'n#{$name}'
+    );
+    @each $breakpoint-name, $breakpoint-value in $breakpoints {
+        @media (min-width: $breakpoint-value) {
+            @include generate-utility-classes(
+                '#{$margin-abbreviation}-#{$breakpoint-name}', 
+                'margin', 
+                $size, 
+                'n#{$name}'
+            );
+        }
     }
-    .--padding-top-#{$name} {
-        padding-top: $size !important;
-    };
-    .--padding-right-#{$name} {
-        padding-right: $size !important;
-    };
-    .--padding-bottom-#{$name} {
-        padding-bottom: $size !important;
-    };
-    .--padding-left-#{$name} {
-        padding-left: $size !important;
-    };
-    .--padding-x-#{$name} {
-        padding-right: $size !important;
-        padding-left: $size !important;
-    };
-    .--padding-y-#{$name} {
-        padding-top: $size !important;
-        padding-bottom: $size !important;
-    };
+
+    // padding
+    @include generate-utility-classes(
+        $padding-abbreviation,
+        'padding',
+        $size,
+        $name 
+    );
+    @each $breakpoint-name, $breakpoint-value in $breakpoints {
+        @media (min-width: $breakpoint-value) {
+            @include generate-utility-classes(
+                '#{$padding-abbreviation}-#{$breakpoint-name}', 
+                'padding', 
+                $size, 
+                $name
+            );
+        }
+    }
 
 }

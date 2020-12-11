@@ -77,6 +77,15 @@ $spacers: (
     96: $spacer-96
 );
 
+$margin-abbreviation: 'margin';
+$padding-abbreviation: 'padding';
+
+$sides: (
+    'top': 'top',
+    'right': 'right',
+    'bottom': 'bottom',
+    'left': 'left'
+);
 
 $white: #fff;
 $black: #000;
