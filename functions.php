@@ -182,15 +182,22 @@ add_action( 'after_setup_theme', '_slate_content_width', 0 );
  * Enqueue scripts and styles.
  */
 function _slate_scripts() {
+	$theme = wp_get_theme();
+
 	// disable core block styles on the front end
 	wp_dequeue_style( 'wp-block-library' );
 	wp_dequeue_style( 'wp-block-library-theme' );
+
 	// load the theme stylesheet
 	wp_enqueue_style( '_slate-style', get_stylesheet_uri(), array(), _slate_VERSION );
-	
+
+	// load theme scripts
+	// @todo use minified theme script
+	wp_enqueue_script( '_slate-script', get_stylesheet_directory_uri() . '/js/theme.js', array( 'jquery' ), $theme->get('Version'), true );
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
+
 }
 add_action( 'wp_enqueue_scripts', '_slate_scripts' );
 
