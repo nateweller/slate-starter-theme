@@ -1,6 +1,6 @@
 # _slate
 
-_slate is a starter theme that does "just enough", and then a little bit more,
+_slate is a starter theme that does "just enough", and then a little bit more.
 
 ## Requirements 
 

@@ -47,8 +47,8 @@ a, .link {
 
 a:hover,
 .link:hover {
-    color: $blue-500;
-    border-bottom-color: $blue-500;
+    color: $blue;
+    border-bottom-color: $blue;
 }
 
 //**
@@ -122,6 +122,34 @@ a:hover,
         padding-right: $spacer-4;
         padding-bottom: $spacer-3;
         padding-left: $spacer-4;
+    }
+
+    .has-small-font-size {
+        font-size: $font-size-xs;
+    }
+
+    .has-normal-font-size {
+        font-size: $font-size-md;
+    }
+
+    .has-medium-font-size {
+        font-size: $font-size-xl;
+    }
+
+    .has-large-font-size {
+        font-size: $font-size-3xl;
+    }
+
+    .has-huge-font-size {
+        font-size: $font-size-5xl;
+    }
+
+    .has-drop-cap:first-letter {
+        font-size: $font-size-5xl;
+        font-weight: $font-weight-semibold;
+        float: left;
+        line-height: 1;
+        padding-right: 0.5rem;
     }
 
 }

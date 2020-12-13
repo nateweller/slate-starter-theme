@@ -82,6 +82,81 @@ if ( ! function_exists( '_slate_setup' ) ) :
 		);
 
 		/**
+		 * Disable default color palette
+		 * 
+		 * @link https://developer.wordpress.org/block-editor/developers/themes/theme-support/#disabling-custom-colors-in-block-color-palettes
+		 */
+		add_theme_support( 'disable-custom-colors' );
+	
+		/**
+		 * Add custom color palette
+		 * 
+		 * @link https://developer.wordpress.org/block-editor/developers/themes/theme-support/#block-color-palettes
+		 */
+		add_theme_support( 'editor-color-palette', array(
+			array(
+				'name'  => __( 'Black', '_slate' ),
+				'slug'  => 'black',
+				'color'	=> '#000',
+			),
+			array(
+				'name'  => __( 'Dark', '_slate' ),
+				'slug'  => 'dark',
+				'color'	=> '#1F2937',
+			),
+			array(
+				'name'  => __( 'Dark Gray', '_slate' ),
+				'slug'  => 'dark-gray',
+				'color'	=> '#374151',
+			),
+			array(
+				'name'  => __( 'Light Gray', '_slate' ),
+				'slug'  => 'gray',
+				'color'	=> '#6B7280',
+			),
+			array(
+				'name'  => __( 'Light', '_slate' ),
+				'slug'  => 'light',
+				'color'	=> '#E5E7EB',
+			),
+			array(
+				'name'  => __( 'White', '_slate' ),
+				'slug'  => 'white',
+				'color'	=> '#FFF',
+			),
+			array(
+				'name'  => __( 'Red', '_slate' ),
+				'slug'  => 'red',
+				'color'	=> '#EF4444',
+			),
+			array(
+				'name'  => __( 'Yellow', '_slate' ),
+				'slug'  => 'yellow',
+				'color' => '#F59E0B',
+			),
+			array(
+				'name'  => __( 'Green', '_slate' ),
+				'slug'  => 'green',
+				'color' => '#10B981',
+			),
+			array(
+				'name'	=> __( 'Blue', '_slate' ),
+				'slug'	=> 'blue',
+				'color'	=> '#3B82F6',
+			),
+			array(
+				'name'	=> __( 'Indigo', '_slate' ),
+				'slug'	=> 'indigo',
+				'color'	=> '#6366F1',
+			),
+			array(
+				'name'	=> __( 'Purple', '_slate' ),
+				'slug'	=> 'purple',
+				'color'	=> '#8B5CF6',
+			)
+		) );
+
+		/**
 		 * Add default menu locations.
 		 */
 		register_nav_menus( array(

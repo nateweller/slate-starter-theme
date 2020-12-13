@@ -1,0 +1,32 @@
+{% extends 'layouts/container.twig' %}
+
+{% block content %}
+
+    <header class="--padding-bottom-24">
+        <h2>
+            {{ __('Search results for:', '_slate') }}
+            {{ title }}
+        </h2>
+    </header>
+
+    {% for post in posts %}
+        <article class="content-area {{ not loop.last ? '--margin-bottom-24' }}">
+            <h2>
+                {{ post.title }}
+            </h2>
+            <p>
+                {{ post.preview.read_more(false) }}
+            </p>
+            <a href="{{ post.link }}" class="button">
+                {{ __('Learn More', '_slate') }}
+            </a>
+        </article>
+    {% endfor %}
+
+    {% if posts is empty %}
+        <p>
+            {{ __('Sorry, but nothing matched your search terms. Please try again with some different keywords.', '_slate') }}
+        </p>
+    {% endif %}
+
+{% endblock %}

@@ -6,6 +6,10 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'cli' => array($vendorDir . '/wp-cli/php-cli-tools/lib'),
+    'WP_CLI' => array($vendorDir . '/wp-cli/wp-cli/php'),
     'Twig_' => array($vendorDir . '/twig/twig/lib'),
     'Routes' => array($vendorDir . '/upstatement/routes'),
+    'Requests' => array($vendorDir . '/rmccue/requests/library'),
+    'Mustache' => array($vendorDir . '/mustache/mustache/src'),
 );
