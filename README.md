@@ -10,7 +10,9 @@ _slate is a starter theme that does "just enough", and then a little bit more.
 
 ## Getting Started
 
-Clone this repo and run `yarn install` to get started.
+1. Clone this repo 
+2. Run `yarn install`
+3. Run `composer update`
 
 ## Scripts
 
