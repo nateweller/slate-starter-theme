@@ -8,6 +8,8 @@ composer.lock
 # Built Files
 *.css
 *.css.map
+*.min.js
+*.js.map
 
 # Junk
 .DS_Store

@@ -160,7 +160,8 @@ if ( ! function_exists( '_slate_setup' ) ) :
 		 * Add default menu locations.
 		 */
 		register_nav_menus( array(
-			'primary_menu' => __( 'Primary Menu', '_slate' )
+			'primary_menu' => __( 'Primary Menu', '_slate' ),
+			'sidebar_menu' => __( 'Sidebar Menu', '_slate' )
 		) );
 	}
 endif;
