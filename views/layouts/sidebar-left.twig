@@ -10,7 +10,12 @@
             <div class="col-12 col-lg-9">
                 {% block content %}
                     {% for post in posts %}
-                        <article>
+                        <article class="content-area {{ not loop.last ? '--margin-bottom-24' }}">
+                            <header class="--padding-bottom-4">
+                                <h2>
+                                    {{ post.title }}
+                                </h2>
+                            </header>
                             {{ post.content }}
                         </article>
                     {% endfor %}

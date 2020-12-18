@@ -7,7 +7,9 @@
  * @package _slate
  */
 
-$context = \Timber\Timber::context();
+use Timber\Timber;
+
+$context = Timber::context();
 $context['title'] = get_search_query();
 
-\Timber\Timber::render( 'views/templates/search.twig', $context );
+Timber::render( 'views/templates/search.twig', $context );

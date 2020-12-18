@@ -7,11 +7,11 @@
  * @package _slate
  */
 
-require_once(__DIR__ . '/vendor/autoload.php');
+require_once( __DIR__ . '/vendor/autoload.php' );
 
-if ( ! defined( '_slate_VERSION' ) ) {
+if ( ! defined( '_SLATE_VERSION' ) ) {
 	// Replace the version number of the theme on each release.
-	define( '_slate_VERSION', '0.0.0' );
+	define( '_SLATE_VERSION', '0.0.0' );
 }
 
 if ( ! function_exists( '_slate_setup' ) ) :
@@ -82,14 +82,50 @@ if ( ! function_exists( '_slate_setup' ) ) :
 		);
 
 		/**
-		 * Disable default color palette
+		 * Enable block editor styles.
+		 * 
+		 * @link https://developer.wordpress.org/block-editor/developers/themes/theme-support/#editor-styles
+		 */
+		add_theme_support( 'editor-styles' );
+		add_editor_style( 'editor-style.css' );
+
+		/**
+		 * Enable support for wide alignment.
+		 * 
+		 * @link https://developer.wordpress.org/block-editor/developers/themes/theme-support/#wide-alignment
+		 */
+		add_theme_support( 'align-wide' );
+
+		/**
+		 * Enable default styles for core blocks.
+		 * 
+		 * @link https://developer.wordpress.org/block-editor/developers/themes/theme-support/#default-block-styles
+		 */
+		add_theme_support( 'wp-block-styles' );
+
+		/**
+		 * Enable custom line height in the block editor.
+		 * 
+		 * @link https://developer.wordpress.org/block-editor/developers/themes/theme-support/#supporting-custom-line-heights
+		 */
+		add_theme_support( 'custom-line-height' );
+
+		/**
+		 * Enable custom padding in the block editor.
+		 * 
+		 * @link https://developer.wordpress.org/block-editor/developers/themes/theme-support/#spacing-control
+		 */
+		add_theme_support('custom-spacing');
+
+		/**
+		 * Disable default color palette.
 		 * 
 		 * @link https://developer.wordpress.org/block-editor/developers/themes/theme-support/#disabling-custom-colors-in-block-color-palettes
 		 */
 		add_theme_support( 'disable-custom-colors' );
 	
 		/**
-		 * Add custom color palette
+		 * Add custom color palette.
 		 * 
 		 * @link https://developer.wordpress.org/block-editor/developers/themes/theme-support/#block-color-palettes
 		 */
@@ -157,6 +193,71 @@ if ( ! function_exists( '_slate_setup' ) ) :
 		) );
 
 		/**
+		 * Add custom type scale.
+		 * 
+		 * @link https://developer.wordpress.org/block-editor/developers/themes/theme-support/#block-font-sizes
+		 */
+		add_theme_support( 'editor-font-sizes', array(
+			array(
+				'name' => __( '2X Small', '_slate' ),
+				'size' => 12,
+				'slug' => '2-xs'
+			),
+			array(
+				'name' => esc_attr__( 'X Small', '_slate' ),
+				'size' => 14,
+				'slug' => 'xs'
+			),
+			array(
+				'name' => esc_attr__( 'Small', '_slate' ),
+				'size' => 16,
+				'slug' => 'sm'
+			),
+			array(
+				'name' => esc_attr__( 'Medium', '_slate' ),
+				'size' => 17,
+				'slug' => 'md'
+			),
+			array(
+				'name' => esc_attr__( 'Large', '_slate' ),
+				'size' => 18,
+				'slug' => 'lg'
+			),
+			array(
+				'name' => esc_attr__( 'X Large', '_slate' ),
+				'size' => 20,
+				'slug' => 'xl'
+			),
+			array(
+				'name' => esc_attr__( '2X Large', '_slate' ),
+				'size' => 24,
+				'slug' => '2-xl'
+			),
+			array(
+				'name' => esc_attr__( '3X Large', '_slate' ),
+				'size' => 30,
+				'slug' => '3-xl'
+			),
+			array(
+				'name' => esc_attr__( '4X Large', '_slate' ),
+				'size' => 36,
+				'slug' => '4-xl'
+			),
+			array(
+				'name' => esc_attr__( '5X Large', '_slate' ),
+				'size' => 48,
+				'slug' => '5-xl'
+			)
+		) );
+
+		/**
+		 * Enable responsive embeds.
+		 * 
+		 * @link https://developer.wordpress.org/block-editor/developers/themes/theme-support/#responsive-embedded-content
+		 */
+		add_theme_support( 'responsive-embeds' );
+
+		/**
 		 * Add default menu locations.
 		 */
 		register_nav_menus( array(
@@ -185,16 +286,11 @@ add_action( 'after_setup_theme', '_slate_content_width', 0 );
 function _slate_scripts() {
 	$theme = wp_get_theme();
 
-	// disable core block styles on the front end
-	wp_dequeue_style( 'wp-block-library' );
-	wp_dequeue_style( 'wp-block-library-theme' );
-
 	// load the theme stylesheet
-	wp_enqueue_style( '_slate-style', get_stylesheet_uri(), array(), _slate_VERSION );
+	wp_enqueue_style( '_slate-style', get_stylesheet_uri(), array(), _SLATE_VERSION );
 
 	// load theme scripts
-	// @todo use minified theme script
-	wp_enqueue_script( '_slate-script', get_stylesheet_directory_uri() . '/js/theme.js', array( 'jquery' ), $theme->get('Version'), true );
+	wp_enqueue_script( '_slate-script', get_stylesheet_directory_uri() . '/js/theme.min.js', array( 'jquery' ), _SLATE_VERSION, true );
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
@@ -202,7 +298,33 @@ function _slate_scripts() {
 }
 add_action( 'wp_enqueue_scripts', '_slate_scripts' );
 
-function mytheme_excerpt_more( $more ) {
-    return '';
+/**
+ * Register ACF Blocks
+ * 
+ * @link https://www.advancedcustomfields.com/resources/acf_register_block_type/
+ */
+function _slate_register_acf_blocks() {
+	if ( ! function_exists( 'acf_register_block_type' ) ) return;
+
+	/**
+	 * Section Block
+	 */
+	acf_register_block_type( array(
+		'name' => 'section',
+		'title' => __( 'Section' ),
+		'description' => __( 'Wrapper block for sections of content' ),
+		'category' => 'layout',
+		'keywords' => array( 'section', 'area', 'row', 'group', 'content', 'bucket', 'padding', 'margin', 'background' ),
+		'mode' => 'preview',
+		'render_callback' => function( $block, $content = '', $is_preview = false, $post_id = 0 ) {
+			$context = \Timber\Timber::context();
+			$context['block'] = $block;
+			$context['fields'] = get_fields();
+			$context['is_preview'] = $is_preview;
+			\Timber\Timber::render( 'views/components/section.twig', $context );
+		},
+		'supports' => array( 'jsx' => true )
+	) );
+
 }
-add_filter('excerpt_more', 'mytheme_excerpt_more');
+add_action( 'acf/init', '_slate_register_acf_blocks' );

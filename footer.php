@@ -7,4 +7,6 @@
  * @package _slate
  */
 
-\Timber\Timber::render( 'views/templates/footer.twig' );
+use Timber\Timber;
+
+Timber::render( 'views/templates/footer.twig' );

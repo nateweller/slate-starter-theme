@@ -1,9 +1,13 @@
 <?php 
 /**
  * Template Name: Full Width
+ * 
+ * @package _slate
  */
 
-$context = \Timber\Timber::context();
-$context['post'] = \Timber\Timber::get_post();
+use \Timber\Timber;
 
-\Timber\Timber::render( 'views/templates/page-full.twig', $context );
+$context = Timber::context();
+$context['post'] = Timber::get_post();
+
+Timber::render( 'views/templates/page-full.twig', $context );

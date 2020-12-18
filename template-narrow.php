@@ -1,9 +1,13 @@
 <?php 
 /**
  * Template Name: Narrow
+ * 
+ * @package _slate
  */
 
-$context = \Timber\Timber::context();
-$context['post'] = \Timber\Timber::get_post();
+use Timber\Timber;
 
-\Timber\Timber::render( 'views/templates/page-narrow.twig', $context );
+$context = Timber::context();
+$context['post'] = Timber::get_post();
+
+Timber::render( 'views/templates/page-narrow.twig', $context );

@@ -51,6 +51,73 @@ a:hover,
     border-bottom-color: $blue;
 }
 
+strong, b {
+    font-weight: $font-weight-semibold;
+}
+
+pre {
+    white-space: pre-wrap;
+}
+
+pre.wp-block-code,
+pre.wp-block-preformatted {
+    margin-top: $spacer-6;
+    margin-bottom: $spacer-6;
+}
+
+pre.wp-block-code {
+    background-color: $gray-100;
+    padding-top: $spacer-3;
+    padding-right: $spacer-4;
+    padding-bottom: $spacer-3;
+    padding-left: $spacer-4;
+}
+
+.has-2-xs-font-size {
+    font-size: $font-size-2xs;
+}
+
+.has-xs-font-size {
+    font-size: $font-size-xs;
+}
+
+.has-md-font-size,
+.has-normal-font-size {
+    font-size: $font-size-md;
+}
+
+.has-lg-font-size {
+    font-size: $font-size-lg;
+}
+
+.has-xl-font-size {
+    font-size: $font-size-xl;
+}
+
+.has-2-xl-font-size {
+    font-size: $font-size-2xl;
+}
+
+.has-3-xl-font-size {
+    font-size: $font-size-3xl;
+}
+
+.has-4-xl-font-size {
+    font-size: $font-size-4xl;
+}
+
+.has-5-xl-font-size {
+    font-size: $font-size-5xl;
+}
+
+.has-drop-cap:first-letter {
+    font-size: $font-size-5xl;
+    font-weight: $font-weight-semibold;
+    float: left;
+    line-height: 1;
+    padding-right: 0.5rem;
+}
+
 //**
 // Content Area Typography
 //**
@@ -104,52 +171,6 @@ a:hover,
             font-weight: $font-weight-bold;
             font-style: normal;
         }
-    }
-
-    pre {
-        white-space: pre-wrap;
-    }
-
-    pre.wp-block-code,
-    pre.wp-block-preformatted {
-        margin-top: $spacer-6;
-        margin-bottom: $spacer-6;
-    }
-
-    pre.wp-block-code {
-        background-color: $gray-100;
-        padding-top: $spacer-3;
-        padding-right: $spacer-4;
-        padding-bottom: $spacer-3;
-        padding-left: $spacer-4;
-    }
-
-    .has-small-font-size {
-        font-size: $font-size-xs;
-    }
-
-    .has-normal-font-size {
-        font-size: $font-size-md;
-    }
-
-    .has-medium-font-size {
-        font-size: $font-size-xl;
-    }
-
-    .has-large-font-size {
-        font-size: $font-size-3xl;
-    }
-
-    .has-huge-font-size {
-        font-size: $font-size-5xl;
-    }
-
-    .has-drop-cap:first-letter {
-        font-size: $font-size-5xl;
-        font-weight: $font-weight-semibold;
-        float: left;
-        line-height: 1;
-        padding-right: 0.5rem;
     }
 
 }

@@ -7,7 +7,10 @@
  * @package _slate
  */
 
-$context = \Timber\Timber::context();
-$context['menu'] = new Timber\Menu( 'primary_menu', array( 'depth' => 2 ) );
+use Timber\Timber;
+use Timber\Menu;
 
-\Timber\Timber::render( 'views/templates/header.twig', $context );
+$context = Timber::context();
+$context['menu'] = new Menu( 'primary_menu', array( 'depth' => 2 ) );
+
+Timber::render( 'views/templates/header.twig', $context );

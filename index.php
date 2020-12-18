@@ -12,7 +12,9 @@
  * @package _slate
  */
 
-$context = \Timber\Timber::context();
-$context['posts'] = \Timber\Timber::get_posts();
+use Timber\Timber;
 
-\Timber\Timber::render( 'views/templates/index.twig', $context );
+$context = Timber::context();
+$context['posts'] = Timber::get_posts();
+
+Timber::render( 'views/templates/index.twig', $context );

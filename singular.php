@@ -1,6 +1,15 @@
 <?php 
+/**
+ * The template for displaying all single posts and pages
+ *
+ * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#single-post
+ *
+ * @package _s
+ */
 
-$context = \Timber\Timber::context();
-$context['post'] = \Timber\Timber::get_post();
+use Timber\Timber;
 
-\Timber\Timber::render( 'views/templates/singular.twig', $context );
+$context = Timber::context();
+$context['post'] = Timber::get_post();
+
+Timber::render( 'views/templates/singular.twig', $context );
