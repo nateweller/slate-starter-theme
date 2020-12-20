@@ -299,6 +299,18 @@ function _slate_scripts() {
 add_action( 'wp_enqueue_scripts', '_slate_scripts' );
 
 /**
+ * Render ACF Block
+ */
+function _slate_render_acf_block( $block, $content = '', $is_preview = false, $post_id = 0 ) {
+	$view_name = str_replace( 'acf/', '', $block['name'] );
+	$context = \Timber\Timber::context();
+	$context['block'] = $block;
+	$context['fields'] = get_fields();
+	$context['is_preview'] = $is_preview;
+	\Timber\Timber::render( "views/components/$view_name.twig", $context );
+}
+
+/**
  * Register ACF Blocks
  * 
  * @link https://www.advancedcustomfields.com/resources/acf_register_block_type/
@@ -316,14 +328,27 @@ function _slate_register_acf_blocks() {
 		'category' => 'layout',
 		'keywords' => array( 'section', 'area', 'row', 'group', 'content', 'bucket', 'padding', 'margin', 'background' ),
 		'mode' => 'preview',
+		'render_callback' => '_slate_render_acf_block',
+		'supports' => array( 'jsx' => true )
+	) );
+
+	/**
+	 * Sidebar Layout Blocks
+	 */
+	acf_register_block_type( array(
+		'name' => 'list-menu',
+		'title' => __( 'List Menu', '__slate' ),
+		'description' => __( 'A left sidebar on the left, with a content area on the right.', '__slate' ),
+		'category' => 'layout',
+		'keywords' => array( 'sidebar', 'side bar', 'layout', 'template', 'aside' ),
+		'mode' => 'preview',
 		'render_callback' => function( $block, $content = '', $is_preview = false, $post_id = 0 ) {
 			$context = \Timber\Timber::context();
 			$context['block'] = $block;
 			$context['fields'] = get_fields();
 			$context['is_preview'] = $is_preview;
-			\Timber\Timber::render( 'views/components/section.twig', $context );
-		},
-		'supports' => array( 'jsx' => true )
+			\Timber\Timber::render( "views/components/sidebar-layout-block.twig", $context );
+		}
 	) );
 
 }

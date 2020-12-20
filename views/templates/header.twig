@@ -12,11 +12,17 @@
         {{ fn('wp_body_open') }}
         <header class="site-header">
             <div class="container site-header__container">
-                <h1>
-                    <a href="{{ site.url }}">
-                        {{ site.name }}
+                {% if logo %}
+                    <a href="{{ site.url }}" class="site-header__logo">
+                        <img src="{{ logo }}" alt="{{ site.name }}" />
                     </a>
-                </h1>
+                {% else %}
+                    <h1>
+                        <a href="{{ site.url }}">
+                            {{ site.name }}
+                        </a>
+                    </h1>
+                {% endif %}
                 <div class="site-header__mobile">
                     <button class="site-header__nav-toggle">
                         Menu

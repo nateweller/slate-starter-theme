@@ -1,0 +1,22 @@
+<nav>
+    <ul>
+        {% for menu_item in menu.items %}
+            <li class="{{ menu_item.classes|join(' ') }}">
+                <a href="{{ menu_item.link }}">
+                    {{ menu_item.title }}
+                </a>
+                {% if menu_item.children %}
+                    <ul>
+                        {% for sub_menu_item in menu.children %}
+                            <li>
+                                <a href="{{ sub_menu_item.link }}">
+                                    {{ sub_menu_item.title }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+</nav>
