@@ -1,5 +1,13 @@
-@import '_normalize';
 @import '_variables';
+
+// Switch to block editor context for conditional styles.
+$is-block-editor: true;
+$is-front-end: false;
+
+// Any block editor content is considered a "content area". 
+// Body styles will be re-mapped to .editor-styles-wrapper by Gutenburg.
+$content-area-selector: 'body';
+
 @import 'buttons';
 @import 'containers';
 @import 'forms';

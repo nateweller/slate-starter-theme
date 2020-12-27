@@ -71,14 +71,15 @@ if (script === 'images') {
 
 
 if (script === 'watch') {
-    var twirlTimer = (function() {
-        var P = ["\\", "|", "/", "-"];
-        var x = 0;
-        return setInterval(function() {
-          process.stdout.write("\r" + P[x++]);
-          x &= 3;
-        }, 250);
-    })();
+    // var twirlTimer = (function() {
+    //     var P = ["\\", "|", "/", "-"];
+    //     var x = 0;
+    //     return setInterval(function() {
+    //       process.stdout.write("\r" + P[x++]);
+    //       x &= 3;
+    //     }, 250);
+    // })();
+    console.log('watching CSS and JS files for changes...');
     runCommand('concurrently --kill-others "yarn watch:css" "yarn watch:js"', () => {
         // watching...
     });

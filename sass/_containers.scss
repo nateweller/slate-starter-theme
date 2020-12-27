@@ -1,9 +1,11 @@
+$gutter-size: $spacer-4;
+
 .container {
     width: 100%;
     margin-right: auto;
     margin-left: auto;
-    padding-right: $spacer-4;
-    padding-left: $spacer-4;
+    padding-right: $gutter-size;
+    padding-left: $gutter-size;
 }
 
 @each $breakpoint, $size in $breakpoints {
@@ -18,4 +20,10 @@
     .container--narrow {
         max-width: map-get($breakpoints, 'md');
     }
+}
+
+.alignfull {
+    margin: $gutter-size calc(50% - 50vw);
+	max-width: 100vw;
+	width: 100vw;
 }

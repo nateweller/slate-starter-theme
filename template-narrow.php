@@ -1,6 +1,6 @@
 <?php 
 /**
- * Template Name: Narrow
+ * Template Name: Narrow Width
  * 
  * @package _slate
  */

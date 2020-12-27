@@ -4,6 +4,7 @@
 body {
     color: $gray-800;
     font-size: 1.0625rem;
+    font-family: $font-family;
     line-height: 1.5;
 }
 
@@ -73,6 +74,10 @@ pre.wp-block-code {
     padding-left: $spacer-4;
 }
 
+.wp-block-cover {
+    margin-bottom: $spacer-6;
+}
+
 .has-2-xs-font-size {
     font-size: $font-size-2xs;
 }
@@ -121,7 +126,7 @@ pre.wp-block-code {
 //**
 // Content Area Typography
 //**
-.content-area {
+#{$content-area-selector} {
 
     h1, .h1, 
     h2, .h2, 
@@ -171,6 +176,15 @@ pre.wp-block-code {
             font-weight: $font-weight-bold;
             font-style: normal;
         }
+    }
+
+    .wp-block-pullquote > blockquote {
+        border-left-style: none;
+    }
+
+    hr {
+        margin-top: $spacer-6;
+        margin-bottom: $spacer-6;
     }
 
 }

@@ -1,4 +1,4 @@
-button,
+// button, // disabled - messes up in block editor
 .button,
 .wp-block-button__link {
     background-color: $black;
@@ -44,6 +44,12 @@ button,
 
         }
 
+    }
+}
+
+@if $is-front-end {
+    button {
+        @extend .button;
     }
 }
 
@@ -101,7 +107,7 @@ button,
 // Content area buttons 
 //**
 
-.content-area {
+#{$content-area-selector} {
     
     .wp-block-buttons {
         margin-top: 1.5rem;
