@@ -39,17 +39,18 @@ h6, .h6 {
 }
 
 a, .link {
-    border-bottom-color: $black;
-    border-bottom-style: solid;
-    border-bottom-width: 0.175em;
+    color: $blue;
     font-weight: $font-weight-semibold;
-    padding-bottom: 2px;
 }
 
 a:hover,
 .link:hover {
-    color: $blue;
-    border-bottom-color: $blue;
+    color: $blue-600;
+    text-decoration-line: underline;
+    text-underline-offset: 0.175em;
+    text-decoration-style: solid;
+    text-decoration-color: $blue;
+    text-decoration-thickness: 0.175em;
 }
 
 strong, b {

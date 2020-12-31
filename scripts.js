@@ -5,11 +5,15 @@
 const fs = require("fs");
 const { exec } = require("child_process");
 const readline = require("readline-sync");
+const imagemin = require('imagemin');
+const imageminJpegtran = require('imagemin-jpegtran');
+const imageminPngquant = require('imagemin-pngquant');
+const imageminWebp = require('imagemin-webp');
 
 const args = process.argv.slice(2);
 const script = args[0];
 
-const runCommand = (commandStr, callback) => {
+const runCommand = (commandStr, callback, options) => {
     exec(commandStr, (error, stdout, stderr) => {
         if (error) {
             return logError(error.message);
@@ -18,8 +22,9 @@ const runCommand = (commandStr, callback) => {
             return logError(stderr);
         }
         if (typeof callback === 'function') {
-            callback();
+            callback(stdout);
         }
+        return stdout;
     });
 }
 
@@ -29,11 +34,11 @@ const logError = errorMessage => {
 
 //**
 // Styles 
-// Transpiles, prefixes, and minifies SCSS in ./sass into CSS in ./
+// Transpiles, prefixes, and minifies SCSS.
 //**
 const styles = (exit) => {
     // transpile SCSS into CSS
-    runCommand('node-sass sass/ -o ./', () => {
+    runCommand('node-sass styles/ -o ./', () => {
         console.log('✅ SCSS => CSS');
         // add browser prefixes to CSS
         runCommand('postcss --use autoprefixer -b \'last 5 versions\' ./style.css -o ./style.css', () => {
@@ -49,7 +54,7 @@ const styles = (exit) => {
 
 //**
 // Scripts
-// Transpiles and minifies all JS files from ./js/src into ./js/dist
+// Transpiles and minifies JS.
 //**
 const scripts = (exit) => {
 
@@ -77,11 +82,25 @@ const scripts = (exit) => {
 
 };
 
-const images = (exit) => {
-    runCommand('imageoptim \'/images\'', () => {
-        console.log('✅ Images Optimized');
-        if (exit) process.exit();
+//**
+// Images
+// Optimizes JPG and PNG images for web, and generates WEBP formats for both.
+//**
+const images = async (exit) => {
+    await imagemin(['images/src/*.{jpg,png}'], {
+        destination: 'images/dist',
+        plugins: [
+            imageminJpegtran(),
+			imageminPngquant({
+				quality: [0.6, 0.8]
+            }),
+            imageminWebp({
+                quality: 50
+            })
+        ]
     });
+    console.log('✅ Images Optimized');
+    if (exit) process.exit();
 };
 
 if (script === 'styles') {
@@ -96,9 +115,10 @@ if (script === 'images') {
     images(true);
 }
 
+// to do: output info from running scripts i.e. browsersync url
 if (script === 'watch') {
     console.log('watching CSS and JS files for changes...');
-    runCommand('concurrently --kill-others "yarn watch:css" "yarn watch:js"', () => {
+    runCommand('concurrently --kill-others "yarn watch:css" "yarn watch:js" "yarn browser-sync start -c bs-config.js"', () => {
         // watching...
     });
 }
@@ -116,23 +136,28 @@ if (script === 'slate') {
         // get template information from user 
         const name = readline.question('Enter template name: ');
         const slug = readline.question('Enter template slug: ');
+
         // generate controller file contents
         let templateController = fs.readFileSync('./resources/new-template.php');
             templateController = templateController
                 .toString()
                 .replace('__SLUG__', slug)
                 .replace('__NAME__', name);
+                
         // generate view file contents
         const templateView = fs.readFileSync('./resources/new-template.twig').toString();
+
         // create files
         fs.writeFileSync(`template-${slug}.php`, templateController);
         fs.writeFileSync(`views/templates/page-${slug}.twig`, templateView);
 
+        // output results
         console.log(termGreen);
         console.log(`template-${slug}.php generated.`);
         console.log(`views/templates/page-${slug}.twig generated.`);
         console.log(termReset);
 
+        // open new files in VS Code
         runCommand(`code template-${slug}.php`);
         runCommand(`code views/templates/page-${slug}.twig`);
     }

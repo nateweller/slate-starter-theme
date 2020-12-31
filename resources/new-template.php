@@ -3,6 +3,7 @@
  * Template Name: __NAME__
  * 
  * @package _slate
+ * @todo prevent WP from loading this as an actual template
  */
 
 use \Timber\Timber;

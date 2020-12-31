@@ -7,13 +7,20 @@
  */
 @import '_normalize';
 @import '_variables';
+
+@import 'vendor/font-awesome';
+
+@import 'utilities/alignments';
+@import 'utilities/colors';
+@import 'utilities/spacers';
+
 @import 'buttons';
 @import 'containers';
 @import 'grid';
-@import 'spacers';
 @import 'typography';
 
 @import 'site-header';
+@import 'site-footer';
 
 html {
     scroll-behavior: smooth;

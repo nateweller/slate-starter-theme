@@ -8,8 +8,11 @@ $is-front-end: false;
 // Body styles will be re-mapped to .editor-styles-wrapper by Gutenburg.
 $content-area-selector: 'body';
 
+@import 'utilities/spacers';
+@import 'utilities/colors';
+@import 'utilities/alignments';
+
 @import 'buttons';
 @import 'containers';
 @import 'grid';
-@import 'spacers';
 @import 'typography';

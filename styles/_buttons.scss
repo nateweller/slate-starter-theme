@@ -14,11 +14,13 @@
     padding-bottom: 0.5rem;
     padding-left: 1rem;
     font-weight: $font-weight-bold;
+    text-decoration: none;
 
     &:hover {
         background-color: $blue;
         border-color: $blue;
         color: $white;
+        text-decoration: none;
     }
 
     // generate styles for classes from WP editor

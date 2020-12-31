@@ -314,12 +314,24 @@ function _slate_scripts() {
 	wp_enqueue_style( '_slate-style', get_stylesheet_uri(), array(), _SLATE_VERSION );
 
 	// load theme scripts
-	wp_enqueue_script( '_slate-script', get_stylesheet_directory_uri() . '/js/theme.min.js', array( 'jquery' ), _SLATE_VERSION, true );
+	wp_enqueue_script( '_slate-script', get_stylesheet_directory_uri() . '/js/dist/theme.min.js', array( 'jquery' ), _SLATE_VERSION, true );
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
 }
 add_action( 'wp_enqueue_scripts', '_slate_scripts' );
+
+/**
+ * Browsersync Integration //
+ */
+function _slate_browsersync() {
+	echo "
+		<script id=\"__bs_script__\">//<![CDATA[
+			document.write(\"<script async src='http://HOST:3000/browser-sync/browser-sync-client.js?v=2.26.13'><\/script>\".replace(\"HOST\", location.hostname));
+		//]]></script>
+	";
+}
+add_action( 'wp_footer', '_slate_browsersync' );
 
 /**
  * Render ACF Block
