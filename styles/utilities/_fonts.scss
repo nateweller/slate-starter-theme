@@ -1,0 +1,64 @@
+//**
+// Font + Type Utilities
+//**
+
+.has-2-xs-font-size {
+    font-size: $font-size-2xs !important;
+}
+
+.has-xs-font-size {
+    font-size: $font-size-xs !important;
+}
+
+.has-md-font-size,
+.has-normal-font-size {
+    font-size: $font-size-md !important;
+}
+
+.has-lg-font-size {
+    font-size: $font-size-lg !important;
+}
+
+.has-xl-font-size {
+    font-size: $font-size-xl !important;
+}
+
+.has-2-xl-font-size {
+    font-size: $font-size-2xl !important;
+}
+
+.has-3-xl-font-size {
+    font-size: $font-size-3xl !important;
+}
+
+.has-4-xl-font-size {
+    font-size: $font-size-4xl !important;
+}
+
+.has-5-xl-font-size {
+    font-size: $font-size-5xl !important;
+}
+
+.has-font-align-normal { 
+    font-weight: $font-weight-normal !important; 
+}
+
+.has-font-align-semibold { 
+    font-weight: $font-weight-semibold !important; 
+}
+
+.has-font-align-bold { 
+    font-weight: $font-weight-bold !important; 
+}
+
+.has-text-align-left { 
+    text-align: left !important; 
+}
+
+.has-text-align-center { 
+    text-align: center !important; 
+}
+
+.has-text-align-right { 
+    text-align: right !important; 
+}

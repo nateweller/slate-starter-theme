@@ -1,6 +1,9 @@
 .site-footer {
     background: $black;
     color: $white;
-    padding-top: $spacer-6;
-    padding-bottom: $spacer-6;
+    padding-top: $spacer-10;
+    padding-bottom: $spacer-10;
+    // font-size: $font-size-2xs;
+    font-weight: $font-weight-bold;
+    text-align: center;
 }
