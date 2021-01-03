@@ -9,7 +9,7 @@
 
 /**
  * Autoload dependencies.
- * 
+ *
  * @link https://getcomposer.org/doc/01-basic-usage.md#autoloading
  */
 require_once( __DIR__ . '/vendor/autoload.php' );
@@ -58,7 +58,7 @@ function _slate_setup() {
 	add_theme_support( 'post-thumbnails' );
 
 	/**
-	 * Switch default core markup for search form, comment form, 
+	 * Switch default core markup for search form, comment form,
 	 * and comments to output valid HTML5.
 	 */
 	add_theme_support(
@@ -91,7 +91,7 @@ function _slate_setup() {
 
 	/**
 	 * Enable block editor styles.
-	 * 
+	 *
 	 * @link https://developer.wordpress.org/block-editor/developers/themes/theme-support/#editor-styles
 	 */
 	add_theme_support( 'editor-styles' );
@@ -99,49 +99,49 @@ function _slate_setup() {
 
 	/**
 	 * Enable support for wide alignment.
-	 * 
+	 *
 	 * @link https://developer.wordpress.org/block-editor/developers/themes/theme-support/#wide-alignment
 	 */
 	add_theme_support( 'align-wide' );
 
 	/**
 	 * Enable default styles for core blocks.
-	 * 
+	 *
 	 * @link https://developer.wordpress.org/block-editor/developers/themes/theme-support/#default-block-styles
 	 */
 	add_theme_support( 'wp-block-styles' );
 
 	/**
 	 * Enable custom line height in the block editor.
-	 * 
+	 *
 	 * @link https://developer.wordpress.org/block-editor/developers/themes/theme-support/#supporting-custom-line-heights
 	 */
 	add_theme_support( 'custom-line-height' );
 
 	/**
 	 * Enable custom units in the block editor.
-	 * 
+	 *
 	 * @link https://developer.wordpress.org/block-editor/developers/themes/theme-support/#support-custom-units
 	 */
 	add_theme_support( 'custom-units', array( 'px', 'rem', 'vh', 'vw' ) );
 
 	/**
 	 * Enable custom padding in the block editor.
-	 * 
+	 *
 	 * @link https://developer.wordpress.org/block-editor/developers/themes/theme-support/#spacing-control
 	 */
 	add_theme_support('custom-spacing');
 
 	/**
 	 * Disable default color palette.
-	 * 
+	 *
 	 * @link https://developer.wordpress.org/block-editor/developers/themes/theme-support/#disabling-custom-colors-in-block-color-palettes
 	 */
 	add_theme_support( 'disable-custom-colors' );
 
 	/**
 	 * Add custom color palette.
-	 * 
+	 *
 	 * @link https://developer.wordpress.org/block-editor/developers/themes/theme-support/#block-color-palettes
 	 */
 	add_theme_support( 'editor-color-palette', array(
@@ -209,7 +209,7 @@ function _slate_setup() {
 
 	/**
 	 * Add custom type scale.
-	 * 
+	 *
 	 * @link https://developer.wordpress.org/block-editor/developers/themes/theme-support/#block-font-sizes
 	 */
 	add_theme_support( 'editor-font-sizes', array(
@@ -267,7 +267,7 @@ function _slate_setup() {
 
 	/**
 	 * Enable responsive embeds.
-	 * 
+	 *
 	 * @link https://developer.wordpress.org/block-editor/developers/themes/theme-support/#responsive-embedded-content
 	 */
 	add_theme_support( 'responsive-embeds' );
@@ -284,7 +284,7 @@ add_action( 'after_setup_theme', '_slate_setup' );
 
 /**
  * Rename the default template.
- * 
+ *
  * @link https://developer.wordpress.org/reference/hooks/default_page_template_title/
  */
 function _slate_default_page_template_title() {
@@ -322,7 +322,7 @@ function _slate_scripts() {
 add_action( 'wp_enqueue_scripts', '_slate_scripts' );
 
 /**
- * Browsersync Integration //
+ * Browsersync Integration
  */
 function _slate_browsersync() {
 	echo "
@@ -334,57 +334,15 @@ function _slate_browsersync() {
 add_action( 'wp_footer', '_slate_browsersync' );
 
 /**
- * Render ACF Block
- */
-function _slate_render_acf_block( $block, $content = '', $is_preview = false, $post_id = 0 ) {
-	$view_name = str_replace( 'acf/', '', $block['name'] );
-	$context = \Timber\Timber::context();
-	$context['block'] = $block;
-	$context['fields'] = get_fields();
-	$context['is_preview'] = $is_preview;
-	\Timber\Timber::render( "views/components/$view_name.twig", $context );
-}
-
-/**
  * Register ACF Blocks
- * 
+ *
  * @link https://www.advancedcustomfields.com/resources/acf_register_block_type/
  */
 function _slate_register_acf_blocks() {
+
 	if ( ! function_exists( 'acf_register_block_type' ) ) return;
 
-	/**
-	 * Section Block
-	 */
-	acf_register_block_type( array(
-		'name' => 'section',
-		'title' => __( 'Section' ),
-		'description' => __( 'Wrapper block for sections of content' ),
-		'category' => 'layout',
-		'keywords' => array( 'section', 'area', 'row', 'group', 'content', 'bucket', 'padding', 'margin', 'background' ),
-		'mode' => 'preview',
-		'render_callback' => '_slate_render_acf_block',
-		'supports' => array( 'jsx' => true )
-	) );
-
-	/**
-	 * Sidebar Layout Blocks
-	 */
-	acf_register_block_type( array(
-		'name' => 'list-menu',
-		'title' => __( 'List Menu', '__slate' ),
-		'description' => __( 'A left sidebar on the left, with a content area on the right.', '__slate' ),
-		'category' => 'layout',
-		'keywords' => array( 'sidebar', 'side bar', 'layout', 'template', 'aside' ),
-		'mode' => 'preview',
-		'render_callback' => function( $block, $content = '', $is_preview = false, $post_id = 0 ) {
-			$context = \Timber\Timber::context();
-			$context['block'] = $block;
-			$context['fields'] = get_fields();
-			$context['is_preview'] = $is_preview;
-			\Timber\Timber::render( "views/components/sidebar-layout-block.twig", $context );
-		}
-	) );
+	include_once( 'inc/acf-blocks.php' );
 
 }
 add_action( 'acf/init', '_slate_register_acf_blocks' );

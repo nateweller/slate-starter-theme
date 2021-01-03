@@ -26,7 +26,8 @@
   },
   "scripts": {
     "test": "node scripts.js",
-    "watch": "concurrently --kill-others \"yarn watch:css\" \"yarn watch:js\" \"yarn browser-sync start -c bs-config.js\"",
+    "watch": "concurrently --kill-others \"yarn watch:css\" \"yarn watch:js\"",
+    "watch-sync":  "concurrently --kill-others \"yarn watch:css\" \"yarn watch:js\" \"yarn browser-sync start -c bs-config.js\"",
     "watch:css": "nodemon -e scss --exec \"yarn styles\"",
     "watch:js": "nodemon -e js --exec \"yarn scripts\" --ignore '*.min.js' --ignore '*.map.js'",
     "styles": "node scripts.js styles",
