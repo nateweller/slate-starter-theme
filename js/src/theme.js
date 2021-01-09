@@ -1,10 +1,11 @@
 (function ($) {
 
-    console.log('HI!');
+    console.log(':-)');
 
     // primary menu toggle
-    $(document).on('click', '.site-header__nav-toggle', function() {
-        $('.site-header__mobile-nav').toggleClass('site-header__mobile-nav--open');
+    $('.site-header__nav-toggle > .menu-toggle').click(function() {
+        $(this).toggleClass('menu-toggle--active');
+        $('.site-header__mobile-nav').slideToggle();
     });
-
+    
 }(jQuery));

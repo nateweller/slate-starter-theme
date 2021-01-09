@@ -24,11 +24,11 @@
                     </h1>
                 {% endif %}
                 <div class="site-header__mobile">
-                    <button class="site-header__nav-toggle">
-                        Menu
-                    </button>
+                    <div class="site-header__nav-toggle">
+                        {% include 'views/blocks/menu-toggle.twig' %}
+                    </div>
                 </div>
-                <nav class="site-header__desktop-nav" role="navigation">
+                <nav class="site-header__desktop-nav test" role="navigation">
                     <ul class="has-text-align-right">
                         {% for menu_item in menu.items %}
                             <li class="site-header__item {{ menu_item.classes|join(' ') }}">

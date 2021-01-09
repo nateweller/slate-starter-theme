@@ -1,0 +1,108 @@
+/*!
+ * Adapted from https://github.com/jonsuh/hamburgers by Jonathan Suh @jonsuh
+ */
+
+.menu-toggle {
+    display: block;
+    float: right;
+    cursor: pointer;
+    transition-property: opacity, filter;
+    transition-duration: 0.15s;
+    transition-timing-function: linear;
+    font: inherit;
+    color: inherit;
+    text-transform: none;
+    background-color: transparent;
+    border: 0;
+    margin: 0;
+    overflow: visible; 
+}
+
+.menu-toggle:hover,
+.menu-toggle:focus {
+    outline: none;
+	opacity: 0.7; 
+}
+
+.menu-toggle--active:hover {
+		opacity: 0.7; 
+}
+
+.menu-toggle__box {
+    width: 2.5rem;
+    height: 1.5rem;
+    display: block;
+	position: relative; 
+}
+
+.menu-toggle__inner {
+    display: block;
+    top: 50%;
+	margin-top: -2px; 
+}
+
+.menu-toggle__inner, 
+.menu-toggle__inner::before, 
+.menu-toggle__inner::after {
+	width: 2.5rem;
+	height: 4px;
+	background-color: #000;
+	position: absolute;
+	transition-property: transform;
+	transition-duration: 0.15s;
+	transition-timing-function: ease; 
+}
+
+.menu-toggle--light .menu-toggle__inner, 
+.menu-toggle--light .menu-toggle__inner::before, 
+.menu-toggle--light .menu-toggle__inner::after {
+    background-color: #fff;
+}
+
+.menu-toggle__inner::before, 
+.menu-toggle__inner::after {
+	content: "";
+	display: block; 
+}
+
+.menu-toggle__inner::before {
+	top: -10px; 
+}
+
+.menu-toggle__inner::after {
+	bottom: -10px; 
+}
+
+/*
+* Spin
+*/
+.menu-toggle .menu-toggle__inner {
+    transition-duration: 0.22s;
+	transition-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19); 
+}
+
+.menu-toggle .menu-toggle__inner::before {
+	transition: top 0.1s 0.25s ease-in, opacity 0.1s ease-in; 
+}
+
+.menu-toggle .menu-toggle__inner::after {
+	transition: bottom 0.1s 0.25s ease-in, transform 0.22s cubic-bezier(0.55, 0.055, 0.675, 0.19); 
+}
+
+.menu-toggle--active .menu-toggle__inner {
+    transform: rotate(225deg);
+    transition-delay: 0.12s;
+	transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1); 
+}
+
+.menu-toggle--active .menu-toggle__inner::before {
+	top: 0;
+	opacity: 0;
+	transition: top 0.1s ease-out, opacity 0.1s 0.12s ease-out; 
+}
+
+.menu-toggle--active .menu-toggle__inner::after {
+	bottom: 0;
+	transform: rotate(-90deg);
+	transition: bottom 0.1s ease-out, transform 0.22s 0.12s cubic-bezier(0.215, 0.61, 0.355, 1); 
+}

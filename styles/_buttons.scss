@@ -49,12 +49,6 @@
     }
 }
 
-@if $is-front-end {
-    button {
-        @extend .button;
-    }
-}
-
 .button--outline,
 .is-style-outline > .wp-block-button__link {
     background-color: $white;
@@ -110,6 +104,12 @@
 //**
 
 #{$content-area-selector} {
+
+    @if $is-front-end {
+        button {
+            @extend .button;
+        }
+    }
     
     .wp-block-buttons {
         margin-top: 1.5rem;

@@ -70,8 +70,8 @@
         display: none;
         position: absolute;
         width: 100%;
-        padding-top: 3rem;
-        padding-bottom: 3rem;
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
         background: $black;
         border-bottom: 0.5rem solid $gray-900;
 
@@ -89,13 +89,18 @@
         
     }
 
-    .site-header__mobile-nav__item {
-        margin-bottom: 1rem;
+    .site-header__mobile-nav__item__link {
+        display: block;
+        font-size: $font-size-xl;
+        padding-top: 0.75rem;
+        padding-bottom: 0.75rem;
+        padding-left: 0;
+        transition: all 0.5s ease-out;
 
-        &:last-child {
-            margin-bottom: 0;
+        &:hover {
+            cursor: pointer;
+            padding-left: 0.5rem;
         }
-
     }
     
     .site-header__item {

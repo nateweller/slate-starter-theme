@@ -5,7 +5,7 @@
 const fs = require("fs");
 const { exec } = require("child_process");
 const readline = require("readline-sync");
-const imagemin = require('imagemin');
+const imagemin = require('imagemin-keep-folder');
 const imageminJpegtran = require('imagemin-jpegtran');
 const imageminPngquant = require('imagemin-pngquant');
 const imageminWebp = require('imagemin-webp');
@@ -87,13 +87,24 @@ const scripts = (exit) => {
 // Optimizes JPG and PNG images for web, and generates WEBP formats for both.
 //**
 const images = async (exit) => {
-    await imagemin(['images/src/*.{jpg,png}'], {
-        destination: 'images/dist',
-        plugins: [
+    // Create optimized JPG or PNG
+    await imagemin(['images/src/**/*.{jpg,png}'], {
+        replaceOutputDir: output => {
+            return output.replace('images/src', 'images/dist')
+        },
+        use: [
             imageminJpegtran(),
 			imageminPngquant({
 				quality: [0.6, 0.8]
-            }),
+            })
+        ]
+    });
+    // Generate webp alternative
+    await imagemin(['images/src/**/*.{jpg,png}'], {
+        replaceOutputDir: output => {
+            return output.replace('images/src', 'images/dist')
+        },
+        use: [
             imageminWebp({
                 quality: 50
             })
@@ -118,7 +129,7 @@ if (script === 'images') {
 // to do: output info from running scripts i.e. browsersync url
 if (script === 'watch') {
     console.log('watching CSS and JS files for changes...');
-    runCommand('concurrently --kill-others "yarn watch:css" "yarn watch:js" "yarn browser-sync start -c bs-config.js"', () => {
+    runCommand('concurrently --kill-others "yarn watch:styles" "yarn watch:scripts" "yarn browser-sync start -c bs-config.js"', () => {
         // watching...
     });
 }
