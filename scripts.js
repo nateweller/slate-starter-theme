@@ -33,7 +33,7 @@ const logError = errorMessage => {
 };
 
 //**
-// Styles 
+// Styles
 // Transpiles, prefixes, and minifies SCSS.
 //**
 const styles = (exit) => {
@@ -58,11 +58,11 @@ const styles = (exit) => {
 //**
 const scripts = (exit) => {
 
-    // loop through all JS files 
+    // loop through all JS files
     fs.readdirSync('./js/src').forEach(file => {
         const newFile = file.replace('.js', '.min.js');
 
-        // only attempt to process .js files 
+        // only attempt to process .js files
         if (file.slice(file.length - 3) !== '.js') return;
 
         // transpile ES6 JS to ES2015 JS
@@ -137,6 +137,7 @@ if (script === 'watch') {
 //**
 // Slate Helper Functions (Experimental)
 //**
+const termCyan = '\x1b[36m';
 const termGreen = '\x1b[32m';
 const termReset = '\x1b[0m';
 if (script === 'slate') {
@@ -144,7 +145,7 @@ if (script === 'slate') {
     const subCommand = args[1];
 
     if (subCommand === 'addTemplate') {
-        // get template information from user 
+        // get template information from user
         const name = readline.question('Enter template name: ');
         const slug = readline.question('Enter template slug: ');
 
@@ -154,7 +155,7 @@ if (script === 'slate') {
                 .toString()
                 .replace('__SLUG__', slug)
                 .replace('__NAME__', name);
-                
+
         // generate view file contents
         const templateView = fs.readFileSync('./resources/new-template.twig').toString();
 
@@ -171,6 +172,73 @@ if (script === 'slate') {
         // open new files in VS Code
         runCommand(`code template-${slug}.php`);
         runCommand(`code views/templates/page-${slug}.twig`);
-    }
+	}
+
+	if (subCommand === 'addAcfBlock') {
+		console.log(termCyan);
+		console.log('/**');
+		console.log(' * Enter new block details below...');
+		console.log(' * @link https://www.advancedcustomfields.com/resources/acf_register_block_type/');
+		console.log(' */');
+		console.log(termReset);
+		// get block information from user
+		const name = readline.question('Name: ');
+		const slug = readline.question('Slug: ');
+		const description = readline.question('Description: ');
+		const category = readline.question('Category (common, formatting, layout, widgets, or embed): ');
+		const icon = readline.question('Icon: ');
+		const keywords = readline.question('Enter keywords i.e. foo,bar,baz: ');
+
+		console.log('Mode');
+		console.log(`(String) (Optional) The display mode for your block. Available settings are "auto", "preview" and "edit". Defaults to "preview".
+auto: Preview is shown by default but changes to edit form when block is selected.
+preview: Preview is always shown. Edit form appears in sidebar when block is selected.
+edit: Edit form is always shown.
+
+Note. When in “preview” or “edit” modes, an icon will appear in the block toolbar to toggle between modes.`);
+		const mode = readline.question('Mode (auto, preview, or edit): ');
+		const supports = readline.question('Supports i.e align,mode,jsx: ');
+
+		// append block registration into ./inc/acf-blocks.php
+		fs.appendFileSync('inc/acf-blocks.php', `
+/**
+ * ${name} ACF Block
+ */
+acf_register_block_type( array(
+	'name' => __( '${name}' , '_slate' ),
+	'slug' => '${slug}',
+	'description' => __( '${description}', '_slate' ),
+	'category' => '${category}',
+	'icon' => '${icon}',
+	'keywords' => array( '${keywords.split(',')}' ),
+	'mode' => '${mode}',
+	'supports' => '${supports}'
+) );
+		`);
+
+		 // generate controller file contents
+		 let blockController = fs.readFileSync('./resources/new-block.php');
+		 blockController = blockController
+			 .toString()
+			 .replace('__NAME__', name);
+
+		// generate view file contents
+		const blockView = fs.readFileSync('./resources/new-block.twig').toString();
+
+		// create files
+		fs.writeFileSync(`blocks/acf-${slug}.php`, blockController);
+		fs.writeFileSync(`views/components/${slug}.twig`, blockView);
+
+		// output results
+        console.log(termGreen);
+        console.log(`blocks/acf-${slug}.php generated.`);
+        console.log(`views/components/${slug}.twig generated.`);
+        console.log(termReset);
+
+        // open new files in VS Code
+        runCommand(`code blocks/acf-${slug}.php`);
+        runCommand(`code views/components/${slug}.twig`);
+
+	}
 
 }
